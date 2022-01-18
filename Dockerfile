@@ -55,8 +55,10 @@ ENV JAVA_HOME=/opt/java/openjdk \
 
 #### Net Tools ####
 RUN apt-get update \
-    && apt-get -y install lsof \
-    && apt-get -y install curl
+    && apt-get -y install net-tools  \
+    iputils-ping \
+    iproute2 \
+    lsof
 
 ###### OpendDayLight Instalation ######
 ADD https://nexus.opendaylight.org/content/repositories/opendaylight.release/org/opendaylight/integration/opendaylight/15.1.0/opendaylight-15.1.0.tar.gz /tmp/odl.tar.gz
@@ -65,7 +67,7 @@ RUN mv /tmp/opendaylight-15.1.0 /app
 
 ###### OpendDayLight Setup ######
 # Setup boot features
-ENV ODL_FEATURES_DEFAULT=odl-restconf-all,odl-ovsdb-library,odl-restconf-all,odl-ovsdb-southbound-api,odl-ovsdb-southbound-impl,odl-ovsdb-southbound-impl-rest
+ENV ODL_FEATURES_DEFAULT=odl-restconf-all,odl-ovsdb-library,odl-restconf-all,odl-ovsdb-southbound-api,odl-ovsdb-southbound-impl,odl-ovsdb-southbound-impl-rest,features-openflowplugin
 RUN echo '#!/bin/bash \n\
 ODL_FEATURES_BOOT_INIT=$(grep -m1 "featuresBoot = " /app/etc/org.apache.karaf.features.cfg) \n\
 ODL_FEATURES_BOOT_UPDATED="$(sed "s/=/=$ODL_FEATURES_DEFAULT,/g" <<< $ODL_FEATURES_BOOT_INIT)" \n\
