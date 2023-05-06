@@ -1,7 +1,7 @@
 # docker-odl
-The Docker image for OpenDaylight SDN Controller on Ubuntu 20.04. 
+The Docker image for OpenDaylight SDN Controller
 
-OpenDaylight SDN Controller - Phosphorus 15.1.0
+OpenDaylight SDN Controller - Argon-SR0
 
 ## Github
 [rubenqc/docker-odl](https://github.com/rubenqc/docker-odl)
